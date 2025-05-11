@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"net/http"
 	"os"
 	"strconv"
@@ -17,10 +18,25 @@ type Todo struct {
 	CompletedAt time.Time `json:"completedAt"`
 }
 
-type TodoHandler struct{}
+type TodoHandler struct {
+	tmpl *template.Template
+}
 
-func NewTodoHandler() *TodoHandler {
-	return &TodoHandler{}
+func formatDate(t time.Time) string {
+	if t.IsZero() {
+		return "-"
+	}
+	return t.Format("Jan 2, 2006 at 3:04pm")
+}
+
+func NewTodoHandler(templatePaths ...string) *TodoHandler {
+	tmpl := template.New("layout.html").Funcs(template.FuncMap{
+		"formatDate": formatDate,
+	})
+
+	tmpl = template.Must(tmpl.ParseFiles(templatePaths...)) // <-- use 'tmpl.ParseFiles', not 'template.ParseFiles'
+
+	return &TodoHandler{tmpl: tmpl}
 }
 
 func (h *TodoHandler) AddTodoHandler(w http.ResponseWriter, r *http.Request) {
@@ -191,7 +207,7 @@ func (h *TodoHandler) CompleteTodoHandler(w http.ResponseWriter, r *http.Request
 }
 
 func (h *TodoHandler) GetTodosHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
 	var todos []Todo
 	filename := os.Getenv("TODOS_FILE")
@@ -212,8 +228,17 @@ func (h *TodoHandler) GetTodosHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := json.NewEncoder(w).Encode(todos); err != nil {
-		http.Error(w, "could not encode JSON", http.StatusInternalServerError)
-		return
+	// Define a wrapper struct so your template can access `.Tasks`
+	data := struct {
+		Tasks []Todo
+	}{
+		Tasks: todos,
+	}
+
+	// fmt.Println("foo")
+
+	err = h.tmpl.ExecuteTemplate(w, "layout.html", data) // ✅ Renders layout + blocks
+	if err != nil {
+		http.Error(w, "template rendering error", http.StatusInternalServerError)
 	}
 }

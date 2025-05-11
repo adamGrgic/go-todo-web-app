@@ -9,5 +9,5 @@ func NewContentHandler() *ContentHandler {
 }
 
 func (h *ContentHandler) GetHomePage(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./static/index.html")
+	http.ServeFile(w, r, "./static/templates/layout.html")
 }

@@ -1,0 +1,31 @@
+<!-- tasks.html -->
+{{ define "title" }}Tasks{{ end }}
+
+{{ define "content" }}
+
+<table class="table-auto w-full border-collapse border border-gray-300">
+    <thead>
+        <tr class="bg-gray-100">
+        <th class="border border-gray-300 px-4 py-2 text-left">Task</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Completed</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Created At</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Completed At</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range .Tasks }}
+        <tr>
+        <td class="border border-gray-300 px-4 py-2">{{ .Task }}</td>
+        <td class="border border-gray-300 px-4 py-2">{{ if .Done }}✅{{ else }}❌{{ end }}</td>
+        <td class="border border-gray-300 px-4 py-2">{{ .CreatedAt | formatDate }}</td>
+        <td class="border border-gray-300 px-4 py-2">{{ .CompletedAt | formatDate}}</td>
+        <td class="border border-gray-300 px-4 py-2">
+            <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Complete</button>
+            <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">Delete</button>
+        </td>
+        </tr>
+        {{ end }}
+    </tbody>
+</table>
+{{ end }}

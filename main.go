@@ -15,27 +15,29 @@ func PingHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println("Running GOTH Todo App ...")
-
 	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
 
-	// Serve static files under /static/
-	http.FileServer(http.Dir("./static"))
-
-	taskHandler := handlers.NewTodoHandler()
-	contentHandler := handlers.NewContentHandler()
-
 	port := os.Getenv("PORT")
+
+	fmt.Printf("Starting up GOTH Todo App on port %s...", port)
+
+	// Serve static files under /static/
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+
+	taskHandler := handlers.NewTodoHandler("static/templates/layout.html", "static/templates/tasks.html")
+	// contentHandler := handlers.NewContentHandler()
+
 	http.HandleFunc("/ping", PingHandler)
+
 	http.HandleFunc("/todos/get", taskHandler.GetTodosHandler)
 	http.HandleFunc("/todos/add", taskHandler.AddTodoHandler)
 	http.HandleFunc("/todos/delete", taskHandler.RemoveTodoHandler)
 	http.HandleFunc("/todos/complete", taskHandler.CompleteTodoHandler)
 
-	http.HandleFunc("/home", contentHandler.GetHomePage)
+	http.HandleFunc("/home", taskHandler.GetTodosHandler)
 
 	log.Fatal(http.ListenAndServe(port, nil))
 
