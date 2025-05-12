@@ -32,7 +32,7 @@ func main() {
 
 	http.HandleFunc("/ping", PingHandler)
 
-	http.HandleFunc("/todos/get", taskHandler.GetTodosHandler)
+	http.HandleFunc("/", taskHandler.GetTodosHandler)
 	http.HandleFunc("/todos/add", taskHandler.AddTodoHandler)
 	http.HandleFunc("/todos/delete", taskHandler.RemoveTodoHandler)
 	http.HandleFunc("/todos/complete", taskHandler.CompleteTodoHandler)

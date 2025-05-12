@@ -1,1 +1,44 @@
-[{"id":2,"task":"test 2","done":true,"createdAt":"2025-05-04T19:25:55.053328672-06:00","completedAt":"2025-05-04T19:39:13.903818023-06:00"},{"id":3,"task":"test 3","done":false,"createdAt":"2025-05-04T19:25:55.053328762-06:00","completedAt":"0001-01-01T00:00:00Z"}]
+[
+  {
+    "id": "6976bf96-c6b3-4856-855f-c9195993d488",
+    "task": "create todo application",
+    "done": true,
+    "createdAt": "2025-05-11T18:37:22.845581222-06:00",
+    "completedAt": "2025-05-11T18:46:41.037359203-06:00"
+  },
+  {
+    "id": "5ecf7ce3-c005-4787-9cda-db2d605c85ff",
+    "task": "think about todos to todo",
+    "done": false,
+    "createdAt": "2025-05-11T18:43:14.949505425-06:00",
+    "completedAt": "0001-01-01T00:00:00Z"
+  },
+  {
+    "id": "efeb8e7b-ece2-41e0-9f6b-7e3404e2bc03",
+    "task": "write todos that you want todo",
+    "done": false,
+    "createdAt": "2025-05-11T18:43:50.651825105-06:00",
+    "completedAt": "0001-01-01T00:00:00Z"
+  },
+  {
+    "id": "1a862bd2-8d29-43ca-ad4b-3a02da520f51",
+    "task": "talk about doing the todos ",
+    "done": false,
+    "createdAt": "2025-05-11T18:43:59.496320307-06:00",
+    "completedAt": "0001-01-01T00:00:00Z"
+  },
+  {
+    "id": "a479ada0-8fba-4242-bc6f-ceb33d52c8a5",
+    "task": "complete the todos",
+    "done": false,
+    "createdAt": "2025-05-11T18:44:05.792638327-06:00",
+    "completedAt": "0001-01-01T00:00:00Z"
+  },
+  {
+    "id": "454e1410-f2a1-4e05-9de0-df3d888537dd",
+    "task": "delete the todos bcuz",
+    "done": false,
+    "createdAt": "2025-05-11T18:44:10.924208101-06:00",
+    "completedAt": "0001-01-01T00:00:00Z"
+  }
+]

@@ -2,12 +2,40 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title> Goth Todo Application </title>
         <link href="/static/styles/output.css" rel="stylesheet">
     </head>
-    <body>
-        <h1 class="text-3xl font-bold">
-            Todo List Application
-        </h1>
-       {{ block "content" . }}{{ end }} 
+    <body class="dark dark:bg-gray-900">
+        <section class="p-4">
+            <div class="">
+                <h1 class="text-3xl font-bold dark:text-white">
+                    Todo List Application Demo
+                </h1>
+            </div>
+            <div class="mt-2">
+                <form action="/todos/add" method="POST" class="max-w-md mt-2">
+                    <div class="flex rounded-md shadow-sm overflow-hidden border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800">
+                        <input
+                            type="text"
+                            name="task"
+                            placeholder="Enter a new task..."
+                            required
+                            class="border border-gray-600 flex-grow px-4 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none"
+                        />
+                        <button
+                            type="submit"
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-md font-semibold px-5 py-2"
+                        >
+                        Add
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+        </section>
+            
+        <section class="p-4">
+            {{ block "content" . }}{{ end }} 
+        </section>
     </body>
 </html>
